@@ -99,3 +99,26 @@ body {
 .badge {
     font-size: 60px;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .question-section, .choices-section {
+        width: 90%;
+    }
+
+    .choice {
+        padding: 10px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .popup {
+        width: 90%;
+    }
+
+    .choice {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
