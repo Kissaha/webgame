@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Troubleshooting Game</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+
+    <!-- Hamburger Menu -->
+    <div class="menu">
+        <button class="menu-btn">☰</button>
+        <div class="menu-content">
+            <a href="index.html">Back Home</a>
+        </div>
+    </div>
+
+    <!-- Welcome Pop-up -->
+    <div id="welcomePopup" class="popup">
+        <h2>Welcome to the Network Troubleshooting Game!</h2>
+        <p>Test your troubleshooting skills and level up!</p>
+        <p class="motivational">"Every expert was once a beginner. Keep going!" 🚀</p>
+        <button id="startGame">click</button>
+    </div>
+
+    <!-- Game Interface -->
+    <div class="game-container hidden">
+        <div class="question-section">
+            <h2 id="levelInfo">Level 1</h2>
+            <h2 id="difficultyInfo">Difficulty: Easy</h2>
+            <p id="lifeInfo">Lives: 3</p>
+            <p id="question">How do you check if a device has network connectivity?</p>
+        </div>
+
+        <div class="choices-section">
+            <button class="choice" data-correct="false">A) Restart the device</button>
+            <button class="choice" data-correct="true">B) Check the IP address using 'ipconfig'</button>
+            <button class="choice" data-correct="false">C) Try opening a website</button>
+            <button class="choice" data-correct="false">D) Unplug the power cable</button>
+        </div>
+    </div>
+
+    <!-- Badge Pop-up -->
+    <div id="badgePopup" class="popup hidden">
+        <h2>🎉 Congratulations! 🎉</h2>
+        <h2>٩(^ᗜ^ )و ´</h2>
+        <p>You answered correctly and earned a badge!</p>
+        <p class="badge">🖱</p>
+        <button id="closeBadge">Next</button>
+    </div>
+
+    <!-- Wait Pop-up -->
+    <div id="waitPopup" class="popup hidden">
+        <h2>⚠️ Too many wrong answers! ⚠️</h2>
+        <p>Please wait 5 minutes before you can try again.</p>
+        <button id="closeWait">Close</button>
+    </div>
+    
+    <script src="game2.js"></script>
+</body>
+</html>
