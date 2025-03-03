@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Toggle menu on click
     menuToggle.addEventListener("click", function (event) {
-        console.log("Hamburger menu clicked");
+        console.log("About.html clicked");
         event.stopPropagation();
         navMenu.classList.toggle("show");
     });
@@ -30,7 +30,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("login").addEventListener("click", function() {
         console.log("Login button clicked");
-        alert("Opening Login...");
+        window.location.href = "login.html";
+    });
+
+    document.getElementById("signup").addEventListener("click", function() {
+        console.log("Sign up button clicked");
+        window.location.href = "signup.html";
     });
 
     document.getElementById("leaderboard").addEventListener("click", function() {
@@ -41,4 +46,3 @@ document.addEventListener("DOMContentLoaded", function () {
     // Debugging logs
     console.log("JavaScript loaded successfully");
 });
-
