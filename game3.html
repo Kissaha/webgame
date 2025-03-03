@@ -18,8 +18,7 @@
 
     <!-- Welcome Pop-up -->
     <div id="welcomePopup" class="popup">
-        <h2>Welcome to the Network Troubleshooting Game!</h2>
-        <p>Test your troubleshooting skills and level up!</p>
+        <h2>Difficult Mode</h2>
         <p class="motivational">"Every expert was once a beginner. Keep going!" 🚀</p>
         <button id="startGame">click</button>
     </div>
@@ -28,16 +27,16 @@
     <div class="game-container hidden">
         <div class="question-section">
             <h2 id="levelInfo">Level 1</h2>
-            <h2 id="difficultyInfo">Difficulty: Easy</h2>
+            <h2 id="difficultyInfo">Difficulty: Difficult</h2>
             <p id="lifeInfo">Lives: 3</p>
-            <p id="question">How do you check if a device has network connectivity?</p>
+            <p id="question">A company has multiple computers connected to a modem through a router. One computer cannot access the internet, but others can. You check its IP address and see 169.254.5.20. What is the best troubleshooting step?</p>
         </div>
 
         <div class="choices-section">
-            <button class="choice" data-correct="false">A) Restart the device</button>
-            <button class="choice" data-correct="true">B) Check the IP address using 'ipconfig'</button>
-            <button class="choice" data-correct="false">C) Try opening a website</button>
-            <button class="choice" data-correct="false">D) Unplug the power cable</button>
+            <button class="choice" data-correct="false"> Restart the computer and hope it works.</button>
+            <button class="choice" data-correct="true"> Check if the monitor is turned on.</button>
+            <button class="choice" data-correct="false"> Manually assign an IP in the correct network range.</button>
+            <button class="choice" data-correct="false"> Turn off all computers and restart them at the same time.</button>
         </div>
     </div>
 

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const welcomePopup = document.getElementById("welcomePopup");
     const gameContainer = document.querySelector(".game-container");
-    const startGameButton = document.getElementById("startGame");
+    const startGameButton = document.getElementById("click");
     const choices = document.querySelectorAll(".choice");
     const badgePopup = document.getElementById("badgePopup");
     const closeBadgeButton = document.getElementById("closeBadge");
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (currentLevel >= levels.length) {
             alert("🎉 Congratulations! You completed all levels!");
             saveScore();
-            window.location.href = "leaderboard.html"; // Redirect to leaderboard.html
+            window.location.href = "game3.html"; // Redirect to game3.html
             return;
         }
 
