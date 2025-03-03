@@ -9,13 +9,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const lifeInfo = document.getElementById("lifeInfo");
     const levelInfo = document.getElementById("levelInfo");
     const difficultyInfo = document.getElementById("difficultyInfo");
+    const badgeText = document.querySelector(".badge");
 
-    let currentLevel = 0; // Start at level 0 (before game starts)
+    let currentLevel = 0;
     let incorrectAttempts = 0;
-    const maxIncorrectAttempts = 2; // Move to next level after 2 wrong attempts
+    const maxIncorrectAttempts = 2;
     let score = 0;
 
-    // Levels with medium difficulty
     const levels = [
         {
             question: "A user reports that they cannot print to the network printer. What could be the issue?",
@@ -71,19 +71,17 @@ document.addEventListener("DOMContentLoaded", function () {
             ],
             badge: "🔌",
             difficulty: "Medium",
-        },
+        }
     ];
 
-    // Load the current level
     function loadLevel() {
         if (currentLevel >= levels.length) {
             alert("🎉 Congratulations! You completed all levels!");
             saveScore();
-            window.location.href = "game3.html"; // Redirect to game3.html
+            window.location.href = "game3.html"; // Next game
             return;
         }
 
-        // Update the question, choices, level, and difficulty
         questionText.textContent = levels[currentLevel].question;
         choices.forEach((choice, index) => {
             choice.textContent = levels[currentLevel].answers[index].text;
@@ -93,26 +91,25 @@ document.addEventListener("DOMContentLoaded", function () {
         levelInfo.textContent = `Level: ${currentLevel + 1}`;
         difficultyInfo.textContent = `Difficulty: ${levels[currentLevel].difficulty}`;
         lifeInfo.textContent = `Lives: ${maxIncorrectAttempts - incorrectAttempts}`;
-        incorrectAttempts = 0; // Reset incorrect attempts
+        incorrectAttempts = 0;
     }
 
-    // Start game
     startGameButton.addEventListener("click", function () {
         welcomePopup.classList.add("hidden");
         gameContainer.classList.remove("hidden");
-        currentLevel = 0; // Start from level 1
-        score = 0; // Reset score
+        currentLevel = 0;
+        score = 0;
+        incorrectAttempts = 0;
         loadLevel();
     });
 
-    // Check answer
     choices.forEach((choice) => {
         choice.addEventListener("click", function () {
             const isCorrect = this.getAttribute("data-correct") === "true";
 
             if (isCorrect) {
-                score += 10; // Increase score for correct answer
-                document.querySelector(".badge").textContent = levels[currentLevel].badge;
+                score += 10;
+                badgeText.textContent = levels[currentLevel].badge;
                 badgePopup.classList.remove("hidden");
             } else {
                 incorrectAttempts++;
@@ -127,23 +124,34 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Move to next level when clicking "Next"
     closeBadgeButton.addEventListener("click", function () {
         badgePopup.classList.add("hidden");
         nextLevel();
     });
 
-    // Function to move to the next level
     function nextLevel() {
         currentLevel++;
         loadLevel();
     }
 
-    // Save score to local storage
     function saveScore() {
-        const playerName = prompt("Enter your name:");
-        const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-        leaderboard.push({ name: playerName, score: score });
-        localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+    let username = localStorage.getItem("currentUser"); 
+    if (!username) return;
+
+    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+    // Hanapin kung may existing entry na ang user
+    let existingUser = leaderboard.find(entry => entry.username === username);
+    
+    if (existingUser) {
+        // Idagdag ang bagong score sa dati
+        existingUser.score += score;
+    } else {
+        // Kung bagong player, idagdag sa leaderboard
+        leaderboard.push({ username: username, score: score });
     }
+
+    // I-save ulit ang leaderboard sa localStorage
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+}
 });

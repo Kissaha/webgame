@@ -9,81 +9,80 @@ document.addEventListener("DOMContentLoaded", function () {
     const lifeInfo = document.getElementById("lifeInfo");
     const levelInfo = document.getElementById("levelInfo");
     const difficultyInfo = document.getElementById("difficultyInfo");
+    const badgeText = document.querySelector(".badge");
 
-    let currentLevel = 0; // Start at level 0 (before game starts)
+    let currentLevel = 0;
     let incorrectAttempts = 0;
-    const maxIncorrectAttempts = 2; // Move to next level after 2 wrong attempts
+    const maxIncorrectAttempts = 2;
     let score = 0;
 
-    // Levels with difficult difficulty
+    // Hardest difficulty questions
     const levels = [
         {
-            question: "A company has multiple computers connected to a modem through a router. One computer cannot access the internet, but others can. You check its IP address and see 169.254.5.20. What is the best troubleshooting step?",
+            question: "A server is not responding to client requests. After checking, you find that it has no assigned IP address. What should you do first?",
             answers: [
-                { text: "Restart the computer and see if it resolves the issue.", correct: false },
-                { text: "Check if the monitor is turned on.", correct: false },
-                { text: "Manually assign an IP in the correct network range.", correct: true },
-                { text: "Turn off all computers and restart them at the same time.", correct: false },
+                { text: "Restart the network switch.", correct: false },
+                { text: "Check if the DHCP server is running.", correct: true },
+                { text: "Reinstall the operating system.", correct: false },
+                { text: "Replace the network card.", correct: false },
             ],
-            badge: "🖥️",
-            difficulty: "Difficult",
+            badge: "🔧",
+            difficulty: "Hardest",
         },
         {
-            question: "You set up two computers in a peer-to-peer network using an Ethernet cable. Both have IPs in the 192.168.1.X range, but they cannot communicate. What should you check next?",
+            question: "Which RAID level provides redundancy by mirroring data across two drives?",
             answers: [
-                { text: "If they have the same IP address.", correct: false },
-                { text: "If both computers have working speakers.", correct: false },
-                { text: "If the router is overheating.", correct: false },
-                { text: "If the subnet masks match.", correct: true },
+                { text: "RAID 0", correct: false },
+                { text: "RAID 1", correct: true },
+                { text: "RAID 5", correct: false },
+                { text: "RAID 10", correct: false },
             ],
-            badge: "🔗",
-            difficulty: "Difficult",
+            badge: "💾",
+            difficulty: "Hardest",
         },
         {
-            question: "A student is troubleshooting a peer-to-peer network between two computers using an Ethernet cable. Both devices have the same subnet mask (255.255.255.0) and static IP addresses in the range 192.168.1.X, but they still cannot communicate. What should they check next?",
+            question: "A technician needs to replace a faulty power supply unit (PSU) in a server. What should be done first?",
             answers: [
-                { text: "If a crossover or straight-through cable is being used.", correct: true },
-                { text: "The modem settings.", correct: false },
-                { text: "The internet speed.", correct: false },
-                { text: "The computer’s screen brightness.", correct: false },
+                { text: "Unplug the power cable and wait for capacitors to discharge.", correct: true },
+                { text: "Remove the motherboard first.", correct: false },
+                { text: "Open all the RAM slots.", correct: false },
+                { text: "Disable the network card.", correct: false },
             ],
-            badge: "🔌",
-            difficulty: "Difficult",
+            badge: "⚡",
+            difficulty: "Hardest",
         },
         {
-            question: "A business network uses static IP addresses, but one computer was set to DHCP by mistake. The user reports no internet access. How can this issue be fixed?",
+            question: "A company's database server is experiencing frequent crashes. What is the best approach to diagnose the issue?",
             answers: [
-                { text: "Restart the computer three times.", correct: false },
-                { text: "Wait for the computer to auto-configure.", correct: false },
-                { text: "Install more RAM.", correct: false },
-                { text: "Manually assign the correct static IP address.", correct: true },
+                { text: "Check the event logs and system resource usage.", correct: true },
+                { text: "Restart the server randomly.", correct: false },
+                { text: "Uninstall security software.", correct: false },
+                { text: "Increase the screen resolution.", correct: false },
             ],
-            badge: "📡",
-            difficulty: "Difficult",
+            badge: "📊",
+            difficulty: "Hardest",
         },
         {
-            question: "You are troubleshooting a home modem connected to an ISP. The modem’s WAN light is off, and no devices can connect to the internet. What is the first step?",
+            question: "A network administrator suspects that an unauthorized device is connected to the network. What tool can be used to identify unknown devices?",
             answers: [
-                { text: "Restart the laptop.", correct: false },
-                { text: "Change the modem’s name.", correct: false },
-                { text: "Ensure the modem is securely connected to the ISP line.", correct: true },
-                { text: "Check the computer’s power settings.", correct: false },
+                { text: "Wireshark", correct: true },
+                { text: "Task Manager", correct: false },
+                { text: "Device Manager", correct: false },
+                { text: "Notepad", correct: false },
             ],
-            badge: "🌐",
-            difficulty: "Difficult",
-        },
+            badge: "🔍",
+            difficulty: "Hardest",
+        }
     ];
 
-    // Load the current level
     function loadLevel() {
         if (currentLevel >= levels.length) {
             alert("🎉 Congratulations! You completed all levels!");
             saveScore();
-            window.location.href = "leaderboard.html"; // Redirect to leaderboard.html
+            window.location.href = "leaderboard.html";
             return;
         }
 
-        // Update the question, choices, level, and difficulty
         questionText.textContent = levels[currentLevel].question;
         choices.forEach((choice, index) => {
             choice.textContent = levels[currentLevel].answers[index].text;
@@ -93,26 +92,25 @@ document.addEventListener("DOMContentLoaded", function () {
         levelInfo.textContent = `Level: ${currentLevel + 1}`;
         difficultyInfo.textContent = `Difficulty: ${levels[currentLevel].difficulty}`;
         lifeInfo.textContent = `Lives: ${maxIncorrectAttempts - incorrectAttempts}`;
-        incorrectAttempts = 0; // Reset incorrect attempts
+        incorrectAttempts = 0;
     }
 
-    // Start game
     startGameButton.addEventListener("click", function () {
         welcomePopup.classList.add("hidden");
         gameContainer.classList.remove("hidden");
-        currentLevel = 0; // Start from level 1
-        score = 0; // Reset score
+        currentLevel = 0;
+        score = 0;
+        incorrectAttempts = 0;
         loadLevel();
     });
 
-    // Check answer
     choices.forEach((choice) => {
         choice.addEventListener("click", function () {
             const isCorrect = this.getAttribute("data-correct") === "true";
 
             if (isCorrect) {
-                score += 10; // Increase score for correct answer
-                document.querySelector(".badge").textContent = levels[currentLevel].badge;
+                score += 10;
+                badgeText.textContent = levels[currentLevel].badge;
                 badgePopup.classList.remove("hidden");
             } else {
                 incorrectAttempts++;
@@ -127,23 +125,34 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Move to next level when clicking "Next"
     closeBadgeButton.addEventListener("click", function () {
         badgePopup.classList.add("hidden");
         nextLevel();
     });
 
-    // Function to move to the next level
     function nextLevel() {
         currentLevel++;
         loadLevel();
     }
 
-    // Save score to local storage
     function saveScore() {
-        const playerName = prompt("Enter your name:");
-        const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-        leaderboard.push({ name: playerName, score: score });
-        localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+    let username = localStorage.getItem("currentUser"); 
+    if (!username) return;
+
+    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+    // Hanapin kung may existing entry na ang user
+    let existingUser = leaderboard.find(entry => entry.username === username);
+    
+    if (existingUser) {
+        // Idagdag ang bagong score sa dati
+        existingUser.score += score;
+    } else {
+        // Kung bagong player, idagdag sa leaderboard
+        leaderboard.push({ username: username, score: score });
     }
+
+    // I-save ulit ang leaderboard sa localStorage
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+}
 });

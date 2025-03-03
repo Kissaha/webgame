@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const welcomePopup = document.getElementById("welcomePopup");
-    const gameContainer = document.querySelector(".game-container");
     const startGameButton = document.getElementById("click");
+    const gameContainer = document.querySelector(".game-container");
     const choices = document.querySelectorAll(".choice");
     const badgePopup = document.getElementById("badgePopup");
     const closeBadgeButton = document.getElementById("closeBadge");
@@ -9,13 +9,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const lifeInfo = document.getElementById("lifeInfo");
     const levelInfo = document.getElementById("levelInfo");
     const difficultyInfo = document.getElementById("difficultyInfo");
+    const badgeText = document.querySelector(".badge");
 
-    let currentLevel = 0; // Start at level 0 (before game starts)
+    let currentLevel = 0;
     let incorrectAttempts = 0;
-    const maxIncorrectAttempts = 2; // Move to next level after 2 wrong attempts
+    const maxIncorrectAttempts = 2;
     let score = 0;
 
-    // Levels with easy difficulty
     const levels = [
         {
             question: "How do you check if a device has network connectivity?",
@@ -71,19 +71,30 @@ document.addEventListener("DOMContentLoaded", function () {
             ],
             badge: "📡",
             difficulty: "Easy",
-        },
+        }
     ];
 
-    // Load the current level
+    // Start Game Button
+    startGameButton.addEventListener("click", function () {
+        console.log("Start button clicked");
+        welcomePopup.style.display = "none";
+        gameContainer.classList.remove("hidden");
+        currentLevel = 0;
+        score = 0;
+        incorrectAttempts = 0;
+        loadLevel();
+    });
+
+    // Function para i-load ang kasalukuyang level
     function loadLevel() {
         if (currentLevel >= levels.length) {
             alert("🎉 Congratulations! You completed all levels!");
             saveScore();
-            window.location.href = "game2.html"; // Redirect to game2.html
+            window.location.href = "game2.html"; // Redirect sa susunod na game
             return;
         }
 
-        // Update the question, choices, level, and difficulty
+        // I-update ang question, choices, level, at difficulty
         questionText.textContent = levels[currentLevel].question;
         choices.forEach((choice, index) => {
             choice.textContent = levels[currentLevel].answers[index].text;
@@ -93,26 +104,17 @@ document.addEventListener("DOMContentLoaded", function () {
         levelInfo.textContent = `Level: ${currentLevel + 1}`;
         difficultyInfo.textContent = `Difficulty: ${levels[currentLevel].difficulty}`;
         lifeInfo.textContent = `Lives: ${maxIncorrectAttempts - incorrectAttempts}`;
-        incorrectAttempts = 0; // Reset incorrect attempts
+        incorrectAttempts = 0;
     }
 
-    // Start game
-    startGameButton.addEventListener("click", function () {
-        welcomePopup.classList.add("hidden");
-        gameContainer.classList.remove("hidden");
-        currentLevel = 0; // Start from level 1
-        score = 0; // Reset score
-        loadLevel();
-    });
-
-    // Check answer
+    // Function para sa pag-check ng sagot
     choices.forEach((choice) => {
         choice.addEventListener("click", function () {
             const isCorrect = this.getAttribute("data-correct") === "true";
 
             if (isCorrect) {
-                score += 10; // Increase score for correct answer
-                document.querySelector(".badge").textContent = levels[currentLevel].badge;
+                score += 10;
+                badgeText.textContent = levels[currentLevel].badge;
                 badgePopup.classList.remove("hidden");
             } else {
                 incorrectAttempts++;
@@ -127,23 +129,37 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Move to next level when clicking "Next"
-    closeBadgeButton.addEventListener("click", function () {
-        badgePopup.classList.add("hidden");
-        nextLevel();
-    });
-
-    // Function to move to the next level
+    // Function para lumipat sa next level
     function nextLevel() {
         currentLevel++;
         loadLevel();
     }
 
-    // Save score to local storage
+    // Event listener para sa "Next" button sa badge popup
+    closeBadgeButton.addEventListener("click", function () {
+        badgePopup.classList.add("hidden");
+        nextLevel();
+    });
+
+    // Function para i-save ang score sa local storage
     function saveScore() {
-        const playerName = prompt("Enter your name:");
-        const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-        leaderboard.push({ name: playerName, score: score });
-        localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+    let username = localStorage.getItem("currentUser"); 
+    if (!username) return;
+
+    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+    // Hanapin kung may existing entry na ang user
+    let existingUser = leaderboard.find(entry => entry.username === username);
+    
+    if (existingUser) {
+        // Idagdag ang bagong score sa dati
+        existingUser.score += score;
+    } else {
+        // Kung bagong player, idagdag sa leaderboard
+        leaderboard.push({ username: username, score: score });
     }
+
+    // I-save ulit ang leaderboard sa localStorage
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+}
 });

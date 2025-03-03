@@ -141,3 +141,89 @@ button:hover {
         font-size: 14px;
     }
 }
+
+.square-button {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid white;
+    color: white;
+    font-size: 18px;
+    padding: 20px 40px;
+    cursor: pointer;
+    width: 200px;
+    height: 180px; /* Not fully square */
+    text-align: center;
+    transition: 0.3s;
+    border-radius: 15px; /* Slightly rounded corners */
+    text-decoration: none; /* Remove underline from links */
+    line-height: 140px; /* Center text vertically */
+}
+
+.square-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+footer {
+    background: rgba(0, 0, 0, 0.9);
+    padding: 30px;
+    text-align: center;
+    color: white;
+    margin-top: 50px;
+}
+
+.goals-container, .contact-container {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.goals-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.goals-container li {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.contact-container a {
+    color:  #551b8b;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.social-links a {
+    display: inline-block;
+    margin: 10px;
+    padding: 5px 10px;
+    background: #8a2be2;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.contact-container h3 {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+}
+
+
+footer {
+    margin-top: 350px; /* Adds space above the footer */
+}
+
+.back-button {
+    display: block;
+    margin-top: 40px;  /* Space above */
+    margin-bottom: 60px; /* Space below */
+}

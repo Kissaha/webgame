@@ -20,7 +20,7 @@
             margin: 0;
         }
         .leaderboard-container {
-            width: 320px;
+            width: 350px;
             padding: 20px;
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid white;
@@ -61,7 +61,50 @@
     <div class="leaderboard-container">
         <h2>Leaderboard</h2>
         <ul id="leaderboard-list"></ul>
+        <p id="debug-message" style="font-size: 12px; color: yellow;"></p> <!-- Debug message -->
         <button onclick="window.location.href='index.html'">Back to Home</button>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let leaderboardContainer = document.getElementById("leaderboard-list");
+            let debugMessage = document.getElementById("debug-message");
+
+            if (!leaderboardContainer) {
+                debugMessage.textContent = "❌ Error: Leaderboard container not found!";
+                console.error("Leaderboard container not found. Check your HTML ID.");
+                return;
+            }
+
+            leaderboardContainer.innerHTML = "";
+
+            console.log("📊 Checking Local Storage Data:", localStorage);
+
+            let users = Object.keys(localStorage).filter(key => key.endsWith("_score"));
+
+            if (users.length === 0) {
+                leaderboardContainer.innerHTML = "<li>No scores available yet.</li>";
+                debugMessage.textContent = "ℹ️ No scores found in localStorage.";
+                return;
+            }
+
+            let leaderboard = users.map(userKey => {
+                let username = userKey.replace("_score", "");
+                let score = parseInt(localStorage.getItem(userKey)) || 0;
+                return { username, score };
+            });
+
+            leaderboard.sort((a, b) => b.score - a.score);
+
+            leaderboard.forEach(player => {
+                let listItem = document.createElement("li");
+                listItem.textContent = `${player.username}: ${player.score} points`;
+                leaderboardContainer.appendChild(listItem);
+            });
+
+            debugMessage.textContent = "✅ Leaderboard loaded successfully!";
+            console.log("✅ Leaderboard updated successfully!");
+        });
+    </script>
 </body>
 </html>
