@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Toggle menu on click
     menuToggle.addEventListener("click", function (event) {
+        console.log("Hamburger menu clicked");
         event.stopPropagation();
         navMenu.classList.toggle("show");
     });
@@ -16,34 +17,27 @@ document.addEventListener("DOMContentLoaded", function () {
     // Close menu when clicking outside
     document.addEventListener("click", function (event) {
         if (!menuToggle.contains(event.target) && !navMenu.contains(event.target)) {
+            console.log("Click outside menu");
             navMenu.classList.remove("show");
         }
     });
 
     // Button event listeners
     document.getElementById("startGame").addEventListener("click", function() {
+        console.log("Start Game button clicked");
         window.location.href = "game.html";
     });
-    
 
     document.getElementById("login").addEventListener("click", function() {
+        console.log("Login button clicked");
         alert("Opening Login...");
     });
 
     document.getElementById("leaderboard").addEventListener("click", function() {
-        window.location.href = "pages/leaderboard.html";
+        console.log("Leaderboard button clicked");
+        window.location.href = "leaderboard.html";
     });
-    
-    document.addEventListener("DOMContentLoaded", function () {
-        const leaderboardButton = document.getElementById("leaderboard");
-    
-        if (leaderboardButton) {
-            leaderboardButton.addEventListener("click", function () {
-                window.location.href = "pages/leaderboard.html";
-            });
-        }
-    });
-    
+
     // Debugging logs
     console.log("JavaScript loaded successfully");
 });

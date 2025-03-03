@@ -4,7 +4,7 @@ body {
     font-family: 'Orbitron', sans-serif;
     margin: 0;
     padding: 0;
-    background: #8d5a9c; /* Single background color */
+    background: #8d69aa; /* Single background color */
     color: white;
     text-align: center;
 }
@@ -14,7 +14,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background: rgba(61, 44, 100, 0.8);
+    background: rgba(46, 46, 77, 0.8);
 }
 
 .logo {
@@ -107,6 +107,10 @@ button:hover {
 
     .logo {
         margin-bottom: 10px;
+    }
+
+    .hamburger {
+        align-self: flex-end; /* Move hamburger menu to the right */
     }
 
     .button-container {
