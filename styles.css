@@ -227,3 +227,27 @@ footer {
     margin-top: 40px;  /* Space above */
     margin-bottom: 60px; /* Space below */
 }
+
+
+
+.contact-container a {
+    color: #561274;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.social-links a {
+    display: inline-block;
+    margin: 10px;
+    padding: 5px 10px;
+    background: #571772;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.contact-container h3 {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
