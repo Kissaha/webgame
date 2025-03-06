@@ -1,0 +1,115 @@
+/* taskrush.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a2e;
+    color: white;
+    text-align: center;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.game-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(111, 0, 255, 0.5);
+}
+
+.task-box {
+    font-size: 18px;
+    padding: 15px;
+    background: #16213e;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    width: 80%;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background: #6400b5;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #9900ff;
+    box-shadow: 0 0 10px #b700ff;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0 15px rgba(68, 0, 255, 0.74);
+    width: 300px;
+}
+
+.popup-content h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.popup-content p {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.popup-content button {
+    background: #4600c8;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.popup-content button:hover {
+    background: #470099;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Space between buttons */
+    margin-top: 20px;
+}
+
+.button-container button {
+    background-color: #6700c8;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.button-container button:hover {
+    background-color: #610099;
+}
+

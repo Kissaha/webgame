@@ -1,0 +1,25 @@
+.game-button {
+    width: 200px;
+    height: 200px;
+    border: 2px solid white;
+    border-radius: 15px;
+    background-color: transparent;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.game-button:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    transform: scale(1.05);
+}
+
+.game-button:active {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 1);
+}

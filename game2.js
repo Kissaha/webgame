@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { text: "The battery level.", correct: false },
                 { text: "The DNS settings.", correct: true },
             ],
-            badge: "🌐",
+            badge: "🖱",
             difficulty: "Medium",
         },
         {
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { text: "The network cables are too long.", correct: false },
                 { text: "The Wi-Fi signal is too strong.", correct: false },
             ],
-            badge: "🔧",
+            badge: "🔍",
             difficulty: "Medium",
         },
         {
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { text: "Ask someone else if their internet is working.", correct: false },
                 { text: "Reinstall the operating system.", correct: false },
             ],
-            badge: "🔌",
+            badge: "⚠️",
             difficulty: "Medium",
         }
     ];
@@ -91,7 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
         levelInfo.textContent = `Level: ${currentLevel + 1}`;
         difficultyInfo.textContent = `Difficulty: ${levels[currentLevel].difficulty}`;
         lifeInfo.textContent = `Lives: ${maxIncorrectAttempts - incorrectAttempts}`;
-        incorrectAttempts = 0;
     }
 
     startGameButton.addEventListener("click", function () {
@@ -109,8 +108,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (isCorrect) {
                 score += 10;
-                badgeText.textContent = levels[currentLevel].badge;
+                let earnedBadge = levels[currentLevel].badge;
+                badgeText.textContent = earnedBadge;
                 badgePopup.classList.remove("hidden");
+                saveBadge(earnedBadge);
             } else {
                 incorrectAttempts++;
                 lifeInfo.textContent = `Lives: ${maxIncorrectAttempts - incorrectAttempts}`;
@@ -135,23 +136,35 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function saveScore() {
-    let username = localStorage.getItem("currentUser"); 
-    if (!username) return;
+        let username = localStorage.getItem("currentUser"); 
+        if (!username) return;
 
-    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+        let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
 
-    // Hanapin kung may existing entry na ang user
-    let existingUser = leaderboard.find(entry => entry.username === username);
-    
-    if (existingUser) {
-        // Idagdag ang bagong score sa dati
-        existingUser.score += score;
-    } else {
-        // Kung bagong player, idagdag sa leaderboard
-        leaderboard.push({ username: username, score: score });
+        // Hanapin kung may existing entry na ang user
+        let existingUser = leaderboard.find(entry => entry.username === username);
+        
+        if (existingUser) {
+            // Idagdag ang bagong score sa dati
+            existingUser.score += score;
+        } else {
+            // Kung bagong player, idagdag sa leaderboard
+            leaderboard.push({ username: username, score: score });
+        }
+
+        // I-save ulit ang leaderboard sa localStorage
+        localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
     }
 
-    // I-save ulit ang leaderboard sa localStorage
-    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
-}
+    function saveBadge(badge) {
+        let username = localStorage.getItem("currentUser");
+        if (!username) return;
+
+        let userBadges = JSON.parse(localStorage.getItem(username + "_badges")) || [];
+        
+        if (!userBadges.includes(badge)) {
+            userBadges.push(badge);
+            localStorage.setItem(username + "_badges", JSON.stringify(userBadges));
+        }
+    }
 });

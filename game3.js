@@ -16,8 +16,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const maxIncorrectAttempts = 2;
     let score = 0;
 
-    // Hardest difficulty questions
     const levels = [
+        {
+            question: "A company has multiple computers connected to a modem through a router. One computer cannot access the internet, but others can. You check its IP address and see 169.254.5.20. What is the best troubleshooting step?",
+            answers: [
+                { text: "Restart the computer and hope it.", correct: false },
+                { text: "Check if the monitor is turned on.", correct: false },
+                { text: "Manually assign an IP in the correct network range.", correct: true },
+                { text: "Turn off all computers and restart them at the same time.", correct: false },
+            ],
+            badge: "🕵️",
+            difficulty: "Hardest",
+        },
         {
             question: "A server is not responding to client requests. After checking, you find that it has no assigned IP address. What should you do first?",
             answers: [
@@ -26,18 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { text: "Reinstall the operating system.", correct: false },
                 { text: "Replace the network card.", correct: false },
             ],
-            badge: "🔧",
-            difficulty: "Hardest",
-        },
-        {
-            question: "Which RAID level provides redundancy by mirroring data across two drives?",
-            answers: [
-                { text: "RAID 0", correct: false },
-                { text: "RAID 1", correct: true },
-                { text: "RAID 5", correct: false },
-                { text: "RAID 10", correct: false },
-            ],
-            badge: "💾",
+            badge: "⌨️",
             difficulty: "Hardest",
         },
         {
@@ -77,9 +76,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function loadLevel() {
         if (currentLevel >= levels.length) {
-            alert("🎉 Congratulations! You completed all levels!");
+            alert("🎉 You're unstoppable! Every difficulty—completed! 🏆🚀");
             saveScore();
-            window.location.href = "leaderboard.html";
+            window.location.href = "selectgame.html"; // Redirect after finishing all levels
             return;
         }
 
@@ -92,7 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
         levelInfo.textContent = `Level: ${currentLevel + 1}`;
         difficultyInfo.textContent = `Difficulty: ${levels[currentLevel].difficulty}`;
         lifeInfo.textContent = `Lives: ${maxIncorrectAttempts - incorrectAttempts}`;
-        incorrectAttempts = 0;
     }
 
     startGameButton.addEventListener("click", function () {
@@ -110,8 +108,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (isCorrect) {
                 score += 10;
-                badgeText.textContent = levels[currentLevel].badge;
+                let earnedBadge = levels[currentLevel].badge;
+                badgeText.textContent = earnedBadge;
                 badgePopup.classList.remove("hidden");
+                saveBadge(earnedBadge);
             } else {
                 incorrectAttempts++;
                 lifeInfo.textContent = `Lives: ${maxIncorrectAttempts - incorrectAttempts}`;
@@ -132,27 +132,42 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function nextLevel() {
         currentLevel++;
-        loadLevel();
+        if (currentLevel >= levels.length) {
+            saveScore();
+            window.location.href = "selectgame.html"; // Redirect kapag tapos na ang laro
+        } else {
+            loadLevel();
+        }
     }
 
     function saveScore() {
-    let username = localStorage.getItem("currentUser"); 
-    if (!username) return;
+        let username = localStorage.getItem("currentUser"); 
+        if (!username) return;
 
-    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+        let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
 
-    // Hanapin kung may existing entry na ang user
-    let existingUser = leaderboard.find(entry => entry.username === username);
-    
-    if (existingUser) {
-        // Idagdag ang bagong score sa dati
-        existingUser.score += score;
-    } else {
-        // Kung bagong player, idagdag sa leaderboard
-        leaderboard.push({ username: username, score: score });
+        let existingUser = leaderboard.find(entry => entry.username === username);
+        
+        if (existingUser) {
+            existingUser.score += score;
+        } else {
+            leaderboard.push({ username: username, score: score });
+        }
+
+        localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+
+        window.location.href = "selectgame.html"; // Redirect pagkatapos ng score save
     }
 
-    // I-save ulit ang leaderboard sa localStorage
-    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
-}
+    function saveBadge(badge) {
+        let username = localStorage.getItem("currentUser");
+        if (!username) return;
+
+        let userBadges = JSON.parse(localStorage.getItem(username + "_badges")) || [];
+        
+        if (!userBadges.includes(badge)) {
+            userBadges.push(badge);
+            localStorage.setItem(username + "_badges", JSON.stringify(userBadges));
+        }
+    }
 });

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #82669E;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .navbar {
+            background-color: #3B3552;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .navbar img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .navbar h1 {
+            color: white;
+            font-size: 18px;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            padding: 20px;
+        }
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+        .game-button {
+            width: 250px;
+            height: 250px;
+            border: 2px solid white;
+            color: white;
+            background: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
+        }
+        .game-button:hover {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            transform: scale(1.05);
+        }
+        .game-button:active {
+            box-shadow: 0 0 30px rgba(255, 255, 255, 1);
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 40px;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: 0.3s ease-in-out;
+        }
+        .back-button:hover {
+            background-color: white;
+            color: #3B3552;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .game-button {
+                width: 90%;
+                height: 200px;
+                font-size: 14px;
+            }
+            .back-button {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="logo.jpg" alt="Network Troubleshooting Logo">
+        <h1>Network Troubleshooting</h1>
+    </div>
+    
+    <div class="container">
+        <h2>Select a Game to Play</h2>
+        <div class="buttons">
+            <button class="game-button" onclick="window.location.href='taskrush.html'">Network Fixer: Task Rush</button>
+            <button class="game-button" onclick="window.location.href='command.html'">Command Line Challenge</button>
+        </div>
+        <a href="index.html" class="back-button">Back to Home</a>
+    </div>
+</body>
+</html>

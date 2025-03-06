@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { text: "Check the IP address.", correct: false },
                 { text: "Check the socket of the cables.", correct: false },
             ],
-            badge: "🔌",
+            badge: "🔒",
             difficulty: "Easy",
         },
         {
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { text: "Power Supply.", correct: false },
                 { text: "Cable tester.", correct: true },
             ],
-            badge: "🔧",
+            badge: "🛠",
             difficulty: "Easy",
         },
         {
@@ -104,7 +104,6 @@ document.addEventListener("DOMContentLoaded", function () {
         levelInfo.textContent = `Level: ${currentLevel + 1}`;
         difficultyInfo.textContent = `Difficulty: ${levels[currentLevel].difficulty}`;
         lifeInfo.textContent = `Lives: ${maxIncorrectAttempts - incorrectAttempts}`;
-        incorrectAttempts = 0;
     }
 
     // Function para sa pag-check ng sagot
@@ -114,8 +113,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (isCorrect) {
                 score += 10;
-                badgeText.textContent = levels[currentLevel].badge;
+                let earnedBadge = levels[currentLevel].badge;
+                badgeText.textContent = earnedBadge;
                 badgePopup.classList.remove("hidden");
+                saveBadge(earnedBadge);
             } else {
                 incorrectAttempts++;
                 lifeInfo.textContent = `Lives: ${maxIncorrectAttempts - incorrectAttempts}`;
@@ -143,23 +144,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Function para i-save ang score sa local storage
     function saveScore() {
-    let username = localStorage.getItem("currentUser"); 
-    if (!username) return;
+        let username = localStorage.getItem("currentUser"); 
+        if (!username) return;
 
-    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+        let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
 
-    // Hanapin kung may existing entry na ang user
-    let existingUser = leaderboard.find(entry => entry.username === username);
-    
-    if (existingUser) {
-        // Idagdag ang bagong score sa dati
-        existingUser.score += score;
-    } else {
-        // Kung bagong player, idagdag sa leaderboard
-        leaderboard.push({ username: username, score: score });
+        // Hanapin kung may existing entry na ang user
+        let existingUser = leaderboard.find(entry => entry.username === username);
+        
+        if (existingUser) {
+            // Idagdag ang bagong score sa dati
+            existingUser.score += score;
+        } else {
+            // Kung bagong player, idagdag sa leaderboard
+            leaderboard.push({ username: username, score: score });
+        }
+
+        // I-save ulit ang leaderboard sa localStorage
+        localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
     }
 
-    // I-save ulit ang leaderboard sa localStorage
-    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
-}
+    // Function para i-save ang mga badges ng user sa local storage
+    function saveBadge(badge) {
+        let username = localStorage.getItem("currentUser");
+        if (!username) return;
+
+        let userBadges = JSON.parse(localStorage.getItem(username + "_badges")) || [];
+        
+        if (!userBadges.includes(badge)) {
+            userBadges.push(badge);
+            localStorage.setItem(username + "_badges", JSON.stringify(userBadges));
+        }
+    }
 });

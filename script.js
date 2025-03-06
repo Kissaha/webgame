@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Toggle menu on click
     menuToggle.addEventListener("click", function (event) {
-        console.log("About.html clicked");
+        console.log("Hamburger menu clicked");
         event.stopPropagation();
         navMenu.classList.toggle("show");
     });

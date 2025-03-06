@@ -163,6 +163,34 @@ button:hover {
     background: rgba(255, 255, 255, 0.3);
 }
 
+.about-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.about-container h1, .about-container h2 {
+    color: #8436cc;
+}
+
+.about-container p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #8a2be2;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
 footer {
     background: rgba(0, 0, 0, 0.9);
     padding: 30px;
@@ -250,4 +278,3 @@ footer {
     margin-top: 20px;
     font-size: 20px;
 }
-

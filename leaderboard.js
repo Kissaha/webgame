@@ -29,5 +29,4 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     console.log("✅ Leaderboard updated successfully!");
-    localStorage.clear();
 });

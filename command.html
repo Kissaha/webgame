@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Line Challenge</title>
+    <link rel="stylesheet" href="command.css">
+</head>
+<body>
+    <!-- Welcome Popup -->
+    <div id="welcomePopup" class="popup">
+        <div class="popup-content">
+            <h2>Welcome to Command Line Challenge!</h2>
+            <p>Instruction: Most of the answers require typing numbers. Be careful and enter the correct values!</p>
+            <p>Each correct answer earns you one badge. After completing the game, you will have a total of six badges.</p>
+            <p>GOOD LUCK! ₍^. .^₎⟆.☘︎ ݁˖</p>
+            <button onclick="closePopup()">Start Game</button>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <h1>Command Line Challenge</h1>
+        <div class="terminal">
+            <p id="hint">Hint: Loading...</p>
+            <p class="prompt">C:\> <span id="question">Waiting for command...</span></p>
+            <input type="text" id="commandInput" placeholder="Type your command here...">
+            <button id="submitCommand">Enter</button>
+        </div>
+        <div class="status">
+            <p>Level: <span id="level">1</span></p>
+            <p>Time Left: <span id="timer">60</span>s</p>
+            <p>Badges: <span id="badges">None</span></p>
+        </div>
+        <div class="end-game hidden">
+            <p id="endMessage"></p>
+            <button id="tryAgain">Try Again</button>
+            <button id="homeButton">Home</button>
+            <button id="viewBadges">View Badges</button>
+        </div>
+    </div>
+    
+    <script src="command.js"></script>
+    <script>
+        document.getElementById("viewBadges").addEventListener("click", function () {
+            window.location.href = "badge.html";
+        });
+
+        // Show the welcome pop-up on load
+        function closePopup() {
+            document.getElementById('welcomePopup').style.display = 'none';
+        }
+        window.onload = function() {
+            document.getElementById('welcomePopup').style.display = 'block';
+        };
+    </script>
+</body>
+</html>

@@ -16,29 +16,29 @@
         </div>
     </div>
 
-    <!-- Welcome Pop-up -->
-    <div id="welcomePopup" class="popup">
-        <h2>Medium Mode</h2>
-        <p class="motivational">"Challenges are what make life interesting! Keep pushing forward!" 🚀</p>
-        <button id="click">click</button>
+   <!-- Welcome Pop-up -->
+   <div id="welcomePopup" class="popup">
+    <h2>Medium Mode</h2>
+    <p class="motivational">"Challenges are what make life interesting! Keep pushing forward!" 🚀</p>
+    <button id="click">click</button>
+</div>
+
+<!-- Game Interface -->
+<div class="game-container hidden">
+    <div class="question-section">
+        <h2 id="levelInfo">Level 1</h2>
+        <h2 id="difficultyInfo">Difficulty: Medium</h2>
+        <p id="lifeInfo">Lives: 3</p>
+        <p id="question">A user reports that they cannot print to the network printer. What could be the issue?</p>
     </div>
 
-    <!-- Game Interface -->
-    <div class="game-container hidden">
-        <div class="question-section">
-            <h2 id="levelInfo">Level 1</h2>
-            <h2 id="difficultyInfo">Difficulty: Medium</h2>
-            <p id="lifeInfo">Lives: 3</p>
-            <p id="question">How do you check if a device has network connectivity?</p>
-        </div>
-
-        <div class="choices-section">
-            <button class="choice" data-correct="false">A) Restart the device</button>
-            <button class="choice" data-correct="true">B) Check the IP address using 'ipconfig'</button>
-            <button class="choice" data-correct="false">C) Try opening a website</button>
-            <button class="choice" data-correct="false">D) Unplug the power cable</button>
-        </div>
+    <div class="choices-section">
+        <button class="choice" data-correct="false"> The printer is turned off.</button>
+        <button class="choice" data-correct="false"> The monitor brightness is too low.</button>
+        <button class="choice" data-correct="true"> The printer has an IP conflict.</button>
+        <button class="choice" data-correct="false"> The keyboard is unplugged.</button>
     </div>
+</div>
 
     <!-- Badge Pop-up -->
     <div id="badgePopup" class="popup hidden">
